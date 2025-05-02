@@ -13,8 +13,14 @@ export class HomeComponent implements OnInit {
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.productService.getAll().subscribe((data: Product[]) => {
-      this.products = data;
+    this.productService.getAll().subscribe({
+      next: (data: Product[]) => {
+        console.log("✅ Products loaded:", data);
+        this.products = data;
+      },
+      error: (err) => {
+        console.error("❌ Failed to fetch products:", err);
+      }
     });
   }
 }

@@ -1,0 +1,52 @@
+<header>
+    <div class="admin-header">
+      <h1>{{ title }}</h1>
+    </div>
+  </header>
+  
+  <div class="admin-container">
+    <aside class="admin-menu">
+      <nav>
+        <ul>
+          <li><a href="#">Dashboard</a></li>
+          <li><a routerLink="/admin/products">Produkter</a></li>
+        </ul>
+      </nav>
+    </aside>
+  
+    <main class="admin-content">
+      <form (submit)="handleSubmit($event)" enctype="multipart/form-data">
+        <label>
+          Namn:
+          <input name="name" (change)="handleChange($event)" required />
+        </label>
+        <label>
+          Beskrivning:
+          <textarea name="description" (change)="handleChange($event)" required></textarea>
+        </label>
+        <label>
+          Bild:
+          <input name="image" type="file" (change)="handleChange($event)" required />
+        </label>
+        <label>
+          Brand:
+          <input name="brand" (change)="handleChange($event)" required />
+        </label>
+        <label>
+          SKU:
+          <input name="sku" (change)="handleChange($event)" required />
+        </label>
+        <label>
+          Pris:
+          <input name="price" type="number" (change)="handleChange($event)" required />
+        </label>
+        <label>
+          Publiceringsdatum:
+          <input name="publicationDate" type="date" (change)="handleChange($event)" required />
+        </label>
+  
+        <button type="submit">Lägg till produkt</button>
+      </form>
+    </main>
+  </div>
+  

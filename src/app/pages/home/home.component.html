@@ -1,10 +1,9 @@
-<h2>Products</h2>
-<div *ngIf="products.length === 0">Loading...</div>
-
-<div *ngFor="let product of products" style="border: 1px solid #ccc; margin: 1rem; padding: 1rem;">
-  <h3>{{ product.name }} <span *ngIf="product.isNew === 1">🆕</span></h3>
-  <p><strong>Brand:</strong> {{ product.brand }}</p>
-  <p><strong>Price:</strong> ${{ product.price }}</p>
-  <img [src]="'http://localhost:3000' + product.image" alt="{{ product.name }}" width="200" />
-  <p>{{ product.description }}</p>
+<h2>All Products</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+  <div *ngFor="let product of products" style="border: 1px solid #ccc; padding: 1rem; width: 200px;">
+    <img [src]="'http://localhost:3000' + product.image" alt="{{ product.name }}" width="100%" />
+    <h3>{{ product.name }}</h3>
+    <p><strong>Brand:</strong> {{ product.brand }}</p>
+    <p><strong>Price:</strong> ${{ product.price }}</p>
+  </div>
 </div>

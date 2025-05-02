@@ -1,0 +1,50 @@
+<header>
+    <div class="admin-header">
+      <h1>{{ title }}</h1>
+    </div>
+  </header>
+  
+  <div class="admin-container">
+    <aside class="admin-menu">
+      <nav>
+        <ul>
+          <li><a href="#">Dashboard</a></li>
+          <li><a routerLink="/admin/products">Produkter</a></li>
+          <li><a href="#">Orderhantering</a></li>
+          <li><a href="#">Analysdata</a></li>
+          <li><a href="#">Inställningar</a></li>
+        </ul>
+      </nav>
+    </aside>
+  
+    <main class="admin-content">
+      <p *ngIf="!loaded">Laddar produkter...</p>
+  
+      <div *ngIf="loaded && products.length === 0">
+        Inga produkter hittades.
+      </div>
+  
+      <table *ngIf="loaded && products.length > 0">
+        <thead>
+          <tr>
+            <th>Namn</th>
+            <th>Pris</th>
+            <th>Brand</th>
+            <th>SKU</th>
+            <th>Publicerad</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.brand }}</td>
+            <td>{{ product.sku }}</td>
+            <td>{{ product.publicationDate }}</td>
+            <td><button (click)="handleDelete(product.id)">🗑️</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
