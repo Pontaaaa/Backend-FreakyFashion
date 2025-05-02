@@ -1,0 +1,27 @@
+<div class="container">
+    <h2 *ngIf="!product">Produkten kunde inte hittas</h2>
+  
+    <div *ngIf="product" class="product-details-container">
+      <img [src]="'http://localhost:3000' + product.image" [alt]="product.name" width="300" />
+      <div class="product-details-info">
+        <h1>{{ product.name }}</h1>
+        <p>{{ product.brand }}</p>
+        <p>{{ product.description }}</p>
+        <p><strong>{{ product.price }} SEK</strong></p>
+        <button>Lägg i varukorg</button>
+      </div>
+    </div>
+  
+    <div *ngIf="similarProducts.length > 0" class="similar-products">
+      <h3>Liknande produkter</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+        <div *ngFor="let item of similarProducts" style="border: 1px solid #ccc; padding: 1rem;">
+          <a [routerLink]="['/products', item.slug]">
+            <img [src]="'http://localhost:3000' + item.image" width="150" />
+            <div>{{ item.name }} – {{ item.price }} SEK</div>
+            <small>{{ item.brand }}</small>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>

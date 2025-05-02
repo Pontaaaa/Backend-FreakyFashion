@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product.model';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
@@ -26,5 +27,9 @@ export class ProductService {
     form.append('publicationDate', data.publicationDate);
     form.append('image', imageFile, imageFile.name);
     return this.http.post<{ message: string }>(this.base, form);
+  }
+  search(q: string): Observable<Product[]> {
+    const params = new HttpParams().set('q', q);
+    return this.http.get<Product[]>(`${this.base}/search`, { params });
   }
 }

@@ -1,0 +1,37 @@
+<div class="container">
+    <form (submit)="handleSearchSubmit($event)" class="search-form">
+      <div class="search-wrapper">
+        <input
+          type="text"
+          name="q"
+          placeholder="Sök produkt"
+          [(ngModel)]="searchInput"
+          class="search-input"
+          required
+        />
+        <button type="submit" class="search-icon-button">
+          🔍
+        </button>
+      </div>
+    </form>
+  
+    <h1 *ngIf="query">Sökresultat för: "{{ query }}"</h1>
+  
+    <div class="product-container">
+      <p *ngIf="results.length === 0">Inga produkter hittades.</p>
+  
+      <a
+        *ngFor="let product of results"
+        [routerLink]="['/products', product.slug]"
+        class="product-card"
+      >
+        <div *ngIf="product.isNew" class="new-badge">Nyhet</div>
+        <img [src]="'http://localhost:3000' + product.image" [alt]="product.name" class="product-image" />
+        <div class="product-info">
+          <p class="product-title">{{ product.name }}</p>
+          <p class="product-brand">{{ product.brand }}</p>
+          <p class="product-price">{{ product.price }} SEK</p>
+        </div>
+      </a>
+    </div>
+  </div>
