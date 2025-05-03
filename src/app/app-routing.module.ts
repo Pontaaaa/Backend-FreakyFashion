@@ -10,6 +10,14 @@ import { LayoutComponent } from './layout/layout/layout.component';
 
 const routes: Routes = [
   {
+    path: 'admin/products',
+    component: AdminProductsComponent
+  },
+  {
+    path: 'admin/products/new',
+    component: AdminNewProductComponent
+  },
+  {
     path: '',
     component: LayoutComponent,
     children: [
@@ -19,14 +27,6 @@ const routes: Routes = [
       { path: '**', component: NotFoundComponent },
     ]
   },
-  {
-    path: 'admin/products',
-    component: AdminProductsComponent
-  },
-  {
-    path: 'admin/products/new',
-    component: AdminNewProductComponent
-  }
 ];
 
 @NgModule({

@@ -1,9 +1,31 @@
-<h2>All Products</h2>
-<div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-  <div *ngFor="let product of products" style="border: 1px solid #ccc; padding: 1rem; width: 200px;">
-    <img [src]="'http://localhost:3000' + product.image" alt="{{ product.name }}" width="100%" />
-    <h3>{{ product.name }}</h3>
-    <p><strong>Brand:</strong> {{ product.brand }}</p>
-    <p><strong>Price:</strong> ${{ product.price }}</p>
+<main>
+
+  <div class="hero-container" *ngIf="hero">
+    <img [src]="'assets/images/' + hero.image" alt="Hero" class="heroplaceholder" />
   </div>
-</div>
+
+  <div class="image-grid">
+    <a *ngFor="let img of gridImages" href="#" class="image-container">
+      <img [src]="'assets/images/' + img" alt="" class="image-grid-image" />
+      <div class="image-text">Lorem, ipsum dolor.</div>
+    </a>
+  </div>
+
+  <div class="product-container">
+    <a *ngFor="let product of products" [routerLink]="['/products', product.slug]" class="product-card">
+      <div *ngIf="product.isNew" class="new-badge">Nyhet</div>
+      <img [src]="'http://localhost:3000' + product.image" [alt]="product.name" class="product-image" />
+      <div class="product-favorite-icon">
+        <i class="fa-regular fa-heart"></i>
+      </div>
+      <div class="product-info">
+        <p class="product-title">
+          {{ product.name }}
+          <span class="product-price">{{ product.price }} SEK</span>
+        </p>
+        <p class="product-brand">{{ product.brand }}</p>
+      </div>
+    </a>
+  </div>
+
+</main>

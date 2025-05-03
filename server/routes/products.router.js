@@ -81,20 +81,21 @@ router.post("/", upload.single("image"), (req, res) => {
   }
 });
 
-router.delete("/:id", (req, res) => {
-  const { id } = req.params;
+router.delete('/:id', (req, res) => {
+  const id = req.params.id;
+
   try {
-    const stmt = db.prepare("DELETE FROM products WHERE id = ?");
+    const stmt = db.prepare('DELETE FROM products WHERE id = ?');
     const result = stmt.run(id);
 
     if (result.changes === 0) {
-      return res.status(404).json({ message: "Produkten kunde inte hittas." });
+      return res.status(404).json({ message: 'No product found to delete.' });
     }
 
-    res.status(200).json({ message: "Produkten har raderats." });
+    res.json({ message: 'Product deleted', changes: result.changes });
   } catch (err) {
-    console.error(" Delete error:", err);
-    res.status(500).json({ message: "Något gick fel vid radering." });
+    console.error('Delete failed:', err);
+    res.status(500).json({ error: 'Failed to delete product' });
   }
 });
 

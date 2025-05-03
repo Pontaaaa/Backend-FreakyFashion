@@ -28,13 +28,15 @@ export class AdminNewProductComponent {
 
   handleSubmit(event: Event) {
     event.preventDefault();
-
+  
     const form = new FormData();
     for (const key in this.formData) {
-      form.append(key, this.formData[key]);
+      if (this.formData.hasOwnProperty(key)) {
+        form.append(key, this.formData[key]);
+      }
     }
-
-    this.productService.create(this.formData, this.formData.image).subscribe({
+  
+    this.productService.createProduct(form).subscribe({
       next: (res) => {
         alert(res.message || 'Produkten har lagts till!');
       },
