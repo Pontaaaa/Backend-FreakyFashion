@@ -11,6 +11,9 @@ import { AdminNewProductComponent } from './admin/products/admin-new-product/adm
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { HeaderComponent } from './layout/header/header.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { LayoutComponent } from './layout/layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     AdminNewProductComponent,
     ProductDetailsComponent,
     SearchResultsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    HeaderComponent,
+    FooterComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,

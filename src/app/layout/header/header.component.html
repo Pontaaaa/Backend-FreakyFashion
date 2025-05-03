@@ -1,0 +1,37 @@
+<header>
+    <a routerLink="/">
+      <img src="/assets/images/FR.PNG" alt="freakyfashion logo" class="logo" />
+    </a>
+  
+    <form class="search-form" (submit)="handleSearchSubmit($event)">
+      <div class="search-wrapper">
+        <input
+          type="text"
+          name="q"
+          placeholder="Sök produkt"
+          class="search-input"
+          [(ngModel)]="search"
+        />
+        <button type="submit" class="search-icon-button">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+    </form>
+  
+    <a href="#" class="favorites-icon">
+      <i class="fa-solid fa-heart"></i>
+    </a>
+    <a href="#" class="basket-icon">
+      <i class="fa-solid fa-bag-shopping"></i>
+    </a>
+  
+    <nav>
+      <ul>
+        <li><a href="#">Nyheter</a></li>
+        <li><a href="#">Kategorier</a></li>
+        <li><a href="#">Topplistan</a></li>
+        <li><a href="#">Rea</a></li>
+        <li><a href="#">Kampanjer</a></li>
+      </ul>
+    </nav>
+  </header>
