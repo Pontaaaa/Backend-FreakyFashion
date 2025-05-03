@@ -25,6 +25,8 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/styles/global.css",
+              "src/assets/styles/admin.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -88,6 +90,7 @@
             ],
             "styles": [
               "src/assets/styles/global.css",
+              "src/assets/styles/admin.css",
               "src/styles.css"
             ],
             "scripts": []

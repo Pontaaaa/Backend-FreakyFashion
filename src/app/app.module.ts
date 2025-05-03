@@ -26,7 +26,7 @@ import { LayoutComponent } from './layout/layout/layout.component';
     NotFoundComponent,
     HeaderComponent,
     FooterComponent,
-    LayoutComponent
+    LayoutComponent,
   ],
   imports: [
     BrowserModule,

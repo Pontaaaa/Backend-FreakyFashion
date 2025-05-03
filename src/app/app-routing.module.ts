@@ -6,7 +6,7 @@ import { AdminNewProductComponent } from './admin/products/admin-new-product/adm
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { LayoutComponent } from './layout/layout.component';
+import { LayoutComponent } from './layout/layout/layout.component';
 
 const routes: Routes = [
   {
