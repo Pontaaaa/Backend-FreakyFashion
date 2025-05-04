@@ -47,10 +47,10 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
   similarProductsGrouped(): Product[][] {
-    const groups: Product[][] = [];
+    const grouped: Product[][] = [];
     for (let i = 0; i < this.similarProducts.length; i += 3) {
-      groups.push(this.similarProducts.slice(i, i + 3));
+      grouped.push(this.similarProducts.slice(i, i + 3));
     }
-    return groups;
+    return grouped;
   }
 }

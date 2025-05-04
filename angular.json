@@ -28,7 +28,8 @@
               "src/assets/styles/global.css",
               "src/assets/styles/admin.css",
               "src/styles.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
               "node_modules/@fortawesome/fontawesome-free/js/all.min.js",

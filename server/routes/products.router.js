@@ -106,4 +106,8 @@ router.delete('/:id', (req, res) => {
   }
 });
 
+router.get('/hero', (req, res) => {
+  res.json({ image: '/assets/images/hero.jpg' });
+});
+
 module.exports = router;
