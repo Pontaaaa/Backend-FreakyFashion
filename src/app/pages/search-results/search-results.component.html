@@ -1,20 +1,4 @@
 <div class="container">
-    <form (submit)="handleSearchSubmit($event)" class="search-form">
-      <div class="search-wrapper">
-        <input
-          type="text"
-          name="q"
-          placeholder="Sök produkt"
-          [(ngModel)]="searchInput"
-          class="search-input"
-          required
-        />
-        <button type="submit" class="search-icon-button">
-          🔍
-        </button>
-      </div>
-    </form>
-  
     <h1 *ngIf="query">Sökresultat för: "{{ query }}"</h1>
   
     <div class="product-container">

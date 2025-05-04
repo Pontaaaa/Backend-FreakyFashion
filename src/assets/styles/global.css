@@ -223,18 +223,29 @@ html {
   }
   
   .info-container {
-    margin-top: 100px;
-    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 4rem;
+    background-color: white;
+    border-top: 1px solid #e0e0e0;
+    flex-wrap: wrap;
   }
   
   .info-item {
     display: flex;
-    margin-bottom: 30px;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #333;
+    min-width: 200px;
+    justify-content: center;
   }
   
   .info-item i {
-    font-size: 32px;
-    margin-right: 10px;
+    font-size: 1.8rem;
+    color: black;
   }
   
   .info-item p {
@@ -383,6 +394,20 @@ html {
   
   form {
     max-width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .info-container {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      padding-left: 1rem;
+    }
+  
+    .info-item {
+      justify-content: flex-start;
+      margin-left: 0;
+    }
   }
   
   @media (min-width: 640px) {
@@ -590,7 +615,12 @@ html {
     }
   
     .info-item {
-      padding-left: 25%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      font-size: 1rem;
     }
   
     .bottom-list-container {
@@ -637,6 +667,10 @@ html {
     .info-container {
       display: flex;
       justify-content: space-around;
+      align-items: center;
+      padding: 1rem;
+      background-color: white;
+      border-top: 1px solid #e0e0e0;
     }
   
     .info-item {
