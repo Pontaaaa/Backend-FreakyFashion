@@ -1,0 +1,47 @@
+.spots-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  :host ::ng-deep .spots-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  :host ::ng-deep .spot {
+    position: relative;
+    flex: 1;
+    max-width: 33%;
+    overflow: hidden;
+  }
+  
+  :host ::ng-deep .spot img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .spot-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 4px;
+  }
+  
+  @media screen and (max-width: 1023px) {
+    .spots-wrapper {
+      display: none !important;
+    }
+  }

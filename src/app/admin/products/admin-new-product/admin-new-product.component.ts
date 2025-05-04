@@ -39,7 +39,10 @@ export class AdminNewProductComponent {
         alert(res.message || 'Produkten har lagts till!');
       },
       error: (err) => {
-        alert(err.error?.message || 'Något gick fel vid sparning av produkten.');
+        console.error('Server error:', err);
+    
+        const errorMessage = err?.error?.message || err?.message || 'Något gick fel vid sparning av produkten.';
+        alert(errorMessage);
       }
     });
   }

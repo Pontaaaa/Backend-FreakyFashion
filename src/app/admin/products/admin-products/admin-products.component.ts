@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/services/product.service';
-import { Product } from 'src/app/models/product.model';
+import { ProductService, Product } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-admin-products',
@@ -8,15 +7,13 @@ import { Product } from 'src/app/models/product.model';
   styleUrls: ['../../../../assets/styles/admin.css']
 })
 export class AdminProductsComponent implements OnInit {
-  title = 'Produkter';
   products: Product[] = [];
   loaded = false;
 
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    document.title = this.title;
-    this.fetchProducts();
+    document.title = 'Produkter';
   }
 
   fetchProducts(): void {
@@ -29,12 +26,14 @@ export class AdminProductsComponent implements OnInit {
     });
   }
 
-  handleDelete(productId: number): void {
-    if (!confirm('Vill du verkligen ta bort produkten?')) return;
+  handleDelete(event: Event, id: number): void {
+    event.preventDefault();
+    const confirmed = confirm('Vill du verkligen ta bort produkten?');
+    if (!confirmed) return;
 
-    this.productService.delete(productId).subscribe({
+    this.productService.delete(id).subscribe({
       next: () => {
-        this.products = this.products.filter(p => p.id !== productId);
+        this.products = this.products.filter(p => p.id !== id);
       },
       error: () => alert('Kunde inte ta bort produkten.')
     });

@@ -14,6 +14,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { LayoutComponent } from './layout/layout/layout.component';
+import { SpotsComponent } from './pages/home/spots/spots.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { LayoutComponent } from './layout/layout/layout.component';
     HeaderComponent,
     FooterComponent,
     LayoutComponent,
+    SpotsComponent,
   ],
   imports: [
     BrowserModule,

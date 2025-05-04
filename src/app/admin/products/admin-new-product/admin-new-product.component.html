@@ -1,52 +1,56 @@
-<header>
+<div>
+  <header>
     <div class="admin-header">
-      <h1>{{ title }}</h1>
+      <h1>Ny produkt</h1>
     </div>
   </header>
-  
+
   <div class="admin-container">
     <aside class="admin-menu">
       <nav>
         <ul>
           <li><a href="#">Dashboard</a></li>
           <li><a routerLink="/admin/products">Produkter</a></li>
+          <li><a href="#">Orderhantering</a></li>
+          <li><a href="#">Analysdata</a></li>
+          <li><a href="#">Inställningar</a></li>
+          <li><a href="#">Support</a></li>
         </ul>
       </nav>
     </aside>
-  
+
     <main class="admin-content">
-      <form (submit)="handleSubmit($event)" enctype="multipart/form-data">
-        <label>
-          Namn:
-          <input name="name" (change)="handleChange($event)" required />
-        </label>
-        <label>
-          Beskrivning:
-          <textarea name="description" (change)="handleChange($event)" required></textarea>
-        </label>
-        <label>
-          Bild:
-          <input name="image" type="file" (change)="handleChange($event)" required />
-        </label>
-        <label>
-          Brand:
-          <input name="brand" (change)="handleChange($event)" required />
-        </label>
-        <label>
-          SKU:
-          <input name="sku" (change)="handleChange($event)" required />
-        </label>
-        <label>
-          Pris:
-          <input name="price" type="number" (change)="handleChange($event)" required />
-        </label>
-        <label>
-          Publiceringsdatum:
-          <input name="publicationDate" type="date" (change)="handleChange($event)" required />
-        </label>
-  
-        <button type="submit">Lägg till produkt</button>
-      </form>
+      <div class="content-header">
+        <h2>Ny produkt</h2>
+      </div>
+
+      <div class="new-product-data">
+        <form (submit)="handleSubmit($event)">
+          <label for="name">Namn</label>
+          <input type="text" id="name" name="name" placeholder="Namn" [(ngModel)]="formData.name" required maxlength="25" />
+
+          <label for="description">Beskrivning</label>
+          <textarea id="description" name="description" placeholder="Beskrivning" [(ngModel)]="formData.description" required></textarea>
+
+          <label for="image">Bild</label>
+          <input type="file" id="image" name="image" (change)="handleChange($event)" accept=".png, .jpg, .jpeg" required />
+
+          <label for="brand">Märke</label>
+          <input type="text" id="brand" name="brand" placeholder="Märke" [(ngModel)]="formData.brand" required maxlength="20" />
+
+          <label for="sku">SKU</label>
+          <input type="text" id="sku" name="sku" placeholder="SKU" [(ngModel)]="formData.sku" pattern="^[A-Za-z]{3}\d{3}$" title="Formatet ska vara XXXYYY. Exempel: AAA111" required maxlength="10" />
+
+          <label for="price">Pris</label>
+          <input type="text" id="price" name="price" placeholder="Pris" [(ngModel)]="formData.price" required maxlength="10" />
+
+          <label for="publicationDate">Publiceringsdatum</label>
+          <input type="date" id="publicationDate" name="publicationDate" [(ngModel)]="formData.publicationDate" required />
+
+          <button type="submit">Lägg till</button>
+        </form>
+      </div>
     </main>
   </div>
+</div>
   

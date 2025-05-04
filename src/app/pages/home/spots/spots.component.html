@@ -1,0 +1,8 @@
+<div class="spots-wrapper">
+    <div class="spot" *ngFor="let spot of spots">
+      <a [routerLink]="spot.link">
+        <img [src]="spot.image" alt="Spot image" />
+        <div class="spot-text">{{ spot.text }}</div>
+      </a>
+    </div>
+  </div>

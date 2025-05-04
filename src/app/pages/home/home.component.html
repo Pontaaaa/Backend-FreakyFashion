@@ -1,14 +1,11 @@
 <main>
 
   <div class="hero-container" *ngIf="hero">
-    <img [src]="'assets/images/' + hero.image" alt="Hero" class="heroplaceholder" />
+    <img *ngIf="hero" [src]="'http://localhost:3000' + hero.image" alt="Hero" />
   </div>
 
-  <div class="image-grid">
-    <a *ngFor="let img of gridImages" href="#" class="image-container">
-      <img [src]="'assets/images/' + img" alt="" class="image-grid-image" />
-      <div class="image-text">Lorem, ipsum dolor.</div>
-    </a>
+  <div class="spots-wrapper">
+    <app-spots></app-spots>
   </div>
 
   <div class="product-container">

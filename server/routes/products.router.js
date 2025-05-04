@@ -76,17 +76,17 @@ router.post("/", upload.single("image"), (req, res) => {
       insert.run(name, description, imagePath, brand, sku, price, publicationDate, slug, 1);
       res.status(201).json({ message: "Produkten har lagts till!" });
     } catch (err) {
-      if (err.code === 'SQLITE_CONSTRAINT') {
+      if (err.code === 'SQLITE_CONSTRAINT' || err.message.includes('UNIQUE constraint failed: products.sku')) {
         return res.status(400).json({ message: "Denna SKU används redan. Välj en unik SKU." });
       }
       console.error("Insert error:", err);
-      res.status(500).json({ message: "Något gick fel vid sparning av produkten." });
-    }
-  } catch (err) {
-    console.error("Insert error:", err);
-    res.status(500).json({ message: "Något gick fel vid sparning av produkten." });
-  }
-});
+          res.status(500).json({ message: "Något gick fel vid sparning av produkten." });
+        }
+      } catch (err) {
+        console.error("POST error:", err);
+        res.status(500).json({ message: "Ett fel inträffade vid bearbetning av förfrågan." });
+      }
+    });
 
 router.delete('/:id', (req, res) => {
   const id = req.params.id;
@@ -107,7 +107,7 @@ router.delete('/:id', (req, res) => {
 });
 
 router.get('/hero', (req, res) => {
-  res.json({ image: '/assets/images/hero.jpg' });
+  res.json({ image: '/images/hero.jpg' });
 });
 
 module.exports = router;
