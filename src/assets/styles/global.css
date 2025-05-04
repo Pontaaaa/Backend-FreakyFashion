@@ -1,6 +1,13 @@
 html {
     font-size: 16px;
   }
+
+  .site-wrapper {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
   
   body {
     padding: 0;
@@ -61,6 +68,7 @@ html {
     color: #000000;
     font-size: 27px;
     height: auto;
+    margin-right: 0.3rem;
   }
   
   .basket-icon {
@@ -199,16 +207,20 @@ html {
     justify-content: space-between;
     font-size: 1em;
     margin-bottom: 5px;
+    color: #111;
   }
   
   .product-price {
     font-weight: bold;
+    color: #111;
   }
   
   .product-brand {
     font-size: 0.8em;
     color: #585858;
     margin-bottom: 1.2px;
+    color: #111;
+    font-weight: bold;
   }
   
   .product-new-badge {
@@ -224,32 +236,38 @@ html {
   
   .info-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    padding: 2rem 4rem;
+    padding: 1.5rem;
+    border: 1px solid #d4faff;
+    border-top: 1px solid #d4faff;
     background-color: white;
-    border-top: 1px solid #e0e0e0;
-    flex-wrap: wrap;
+    color: #111;
   }
   
   .info-item {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.6rem;
+    font-size: 1.1rem;
     font-weight: 600;
-    font-size: 1.05rem;
-    color: #333;
-    min-width: 200px;
-    justify-content: center;
+    color: #111;
+    line-height: 1;
   }
   
   .info-item i {
-    font-size: 1.8rem;
-    color: black;
+    font-size: 1.4rem;
+    color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    vertical-align: middle;
+    margin-top: 2px;
   }
   
   .info-item p {
-    margin-top: 3px;
+    margin-top: 14px;
   }
   
   .accordion-body ul {
@@ -361,6 +379,7 @@ html {
   
   .details-product-description {
     font-size: 1em;
+    color: #111;
   }
   
   .details-product-brand {
@@ -588,15 +607,21 @@ html {
       padding: 5px 0;
       color: #000000;
       font-size: 0.8em;
+      text-decoration: none;
     }
   
     .similar-product-price {
       font-weight: bold;
+      color: #111;
+      text-decoration: none;
     }
   
     .similar-product-brand {
       font-size: 0.7em;
       color: #3f3f3f;
+      color: #111;
+      text-decoration: none;
+      font-weight: bold;
     }
   
     .button-container {
