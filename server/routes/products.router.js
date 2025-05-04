@@ -72,9 +72,16 @@ router.post("/", upload.single("image"), (req, res) => {
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
-    insert.run(name, description, imagePath, brand, sku, price, publicationDate, slug, 1);
-
-    res.status(201).json({ message: "Produkten har lagts till!" });
+    try {
+      insert.run(name, description, imagePath, brand, sku, price, publicationDate, slug, 1);
+      res.status(201).json({ message: "Produkten har lagts till!" });
+    } catch (err) {
+      if (err.code === 'SQLITE_CONSTRAINT') {
+        return res.status(400).json({ message: "Denna SKU används redan. Välj en unik SKU." });
+      }
+      console.error("Insert error:", err);
+      res.status(500).json({ message: "Något gick fel vid sparning av produkten." });
+    }
   } catch (err) {
     console.error("Insert error:", err);
     res.status(500).json({ message: "Något gick fel vid sparning av produkten." });

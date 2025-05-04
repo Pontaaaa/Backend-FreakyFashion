@@ -524,9 +524,15 @@ html {
   
     .carousel-control-prev,
     .carousel-control-next {
-      font-size: 20px;
-      margin-left: -10%;
-      margin-right: -10%;
+      width: 5%;
+      top: 45%;
+      transform: translateY(-50%);
+    }
+
+    .carousel-control-prev span,
+    .carousel-control-next span {
+      font-size: 1.8rem;
+      color: black;
     }
   
     .fa-arrow-left,
@@ -648,8 +654,9 @@ html {
     }
   
     .carousel-container {
-      max-width: 1425px;
-      place-self: center;
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
     }
   
     .row {

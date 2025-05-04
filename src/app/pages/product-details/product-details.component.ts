@@ -21,8 +21,14 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.slug = this.route.snapshot.params['slug'];
-    this.loadProduct();
+    this.route.paramMap.subscribe(params => {
+      const newSlug = params.get('slug');
+      if (newSlug) {
+        this.slug = newSlug;
+        this.loadProduct();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
   }
 
   loadProduct(): void {
@@ -30,11 +36,7 @@ export class ProductDetailsComponent implements OnInit {
       this.product = products.find(p => p.slug === this.slug) || null;
       this.similarProducts = products.filter(p => p.slug !== this.slug).slice(0, 6);
 
-      if (this.product) {
-        document.title = this.product.name;
-      } else {
-        document.title = 'Freaky Fashion';
-      }
+      document.title = this.product?.name ?? 'Freaky Fashion';
     });
   }
 
@@ -43,5 +45,12 @@ export class ProductDetailsComponent implements OnInit {
     if (this.search.trim()) {
       this.router.navigate(['/search'], { queryParams: { q: this.search.trim() } });
     }
+  }
+  similarProductsGrouped(): Product[][] {
+    const groups: Product[][] = [];
+    for (let i = 0; i < this.similarProducts.length; i += 3) {
+      groups.push(this.similarProducts.slice(i, i + 3));
+    }
+    return groups;
   }
 }

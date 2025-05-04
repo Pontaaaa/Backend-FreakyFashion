@@ -31,9 +31,7 @@ export class AdminNewProductComponent {
   
     const form = new FormData();
     for (const key in this.formData) {
-      if (this.formData.hasOwnProperty(key)) {
-        form.append(key, this.formData[key]);
-      }
+      form.append(key, this.formData[key]);
     }
   
     this.productService.createProduct(form).subscribe({

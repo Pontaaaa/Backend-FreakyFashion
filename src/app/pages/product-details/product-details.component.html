@@ -1,27 +1,56 @@
 <div class="container">
-    <h2 *ngIf="!product">Produkten kunde inte hittas</h2>
-  
-    <div *ngIf="product" class="product-details-container">
-      <img [src]="'http://localhost:3000' + product.image" [alt]="product.name" width="300" />
-      <div class="product-details-info">
-        <h1>{{ product.name }}</h1>
-        <p>{{ product.brand }}</p>
-        <p>{{ product.description }}</p>
-        <p><strong>{{ product.price }} SEK</strong></p>
-        <button>Lägg i varukorg</button>
+  <h2 *ngIf="!product">Produkten kunde inte hittas</h2>
+
+  <div *ngIf="product">
+    <div class="product-details-container">
+      <div class="details-product-image-container">
+        <div *ngIf="product.isNew" class="new-badge">Nyhet</div>
+        <img [src]="'http://localhost:3000' + product.image" [alt]="product.name" class="details-product-image" />
+        <div class="details-favorite-icon">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+      </div>
+
+      <div class="details-product-info">
+        <h1 class="details-product-title">{{ product.name }}</h1>
+        <p class="details-product-brand">{{ product.brand }}</p>
+        <p class="details-product-description">{{ product.description }}</p>
+        <p class="details-product-price">{{ product.price }} SEK</p>
+        <button class="add-to-cart-button">Lägg i varukorg</button>
       </div>
     </div>
-  
-    <div *ngIf="similarProducts.length > 0" class="similar-products">
-      <h3>Liknande produkter</h3>
-      <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-        <div *ngFor="let item of similarProducts" style="border: 1px solid #ccc; padding: 1rem;">
-          <a [routerLink]="['/products', item.slug]">
-            <img [src]="'http://localhost:3000' + item.image" width="150" />
-            <div>{{ item.name }} – {{ item.price }} SEK</div>
-            <small>{{ item.brand }}</small>
-          </a>
+
+    <div class="carousel-container" *ngIf="similarProducts.length > 0">
+      <h2>Liknande produkter</h2>
+      <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <ng-container *ngFor="let group of similarProductsGrouped(); let i = index">
+            <div class="carousel-item" [class.active]="i === 0">
+              <div class="row">
+                <div *ngFor="let item of group" class="col-md-4">
+                  <a [routerLink]="['/products', item.slug]" class="similar-product-card">
+                    <img [src]="'http://localhost:3000' + item.image" class="d-block w-100" [alt]="item.name" />
+                    <div class="similar-product-info">
+                      <span class="similar-product-title">{{ item.name }}</span>
+                      <span class="similar-product-price">{{ item.price }} SEK</span>
+                    </div>
+                    <p class="similar-product-brand">{{ item.brand }}</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </ng-container>
         </div>
+    
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="fa-solid fa-chevron-left" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="fa-solid fa-chevron-right" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
     </div>
   </div>
+</div>
