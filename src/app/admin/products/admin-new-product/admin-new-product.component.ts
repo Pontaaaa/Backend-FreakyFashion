@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -19,7 +20,10 @@ export class AdminNewProductComponent {
     image: null
   };
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private router: Router
+  ) {}
 
   handleChange(event: any) {
     const { name, value, type, files } = event.target;
@@ -28,21 +32,19 @@ export class AdminNewProductComponent {
 
   handleSubmit(event: Event) {
     event.preventDefault();
-  
+
     const form = new FormData();
     for (const key in this.formData) {
       form.append(key, this.formData[key]);
     }
-  
+
     this.productService.createProduct(form).subscribe({
       next: (res) => {
         alert(res.message || 'Produkten har lagts till!');
+        this.router.navigate(['/admin/products']);
       },
       error: (err) => {
-        console.error('Server error:', err);
-    
-        const errorMessage = err?.error?.message || err?.message || 'Något gick fel vid sparning av produkten.';
-        alert(errorMessage);
+        alert(err.error?.message || 'Något gick fel vid sparning av produkten.');
       }
     });
   }

@@ -1,22 +1,24 @@
-<div class="info-container">
-  <div class="info-item">
-    <i class="fa-solid fa-earth-americas"></i>
-    <p>Gratis frakt och returer</p>
+<div class="site-wrapper">
+
+  <div class="info-container">
+    <div class="info-item">
+      <i class="fa-solid fa-earth-americas"></i>
+      <p>Gratis frakt och returer</p>
+    </div>
+    <div class="info-item">
+      <i class="fa-solid fa-jet-fighter"></i>
+      <p>Expressfrakt</p>
+    </div>
+    <div class="info-item">
+      <i class="fa-solid fa-shield-halved"></i>
+      <p>Säkra betalningar</p>
+    </div>
+    <div class="info-item">
+      <i class="fa-regular fa-face-smile"></i>
+      <p>Nyheter varje dag</p>
+    </div>
   </div>
-  <div class="info-item">
-    <i class="fa-solid fa-jet-fighter"></i>
-    <p>Expressfrakt</p>
-  </div>
-  <div class="info-item">
-    <i class="fa-solid fa-shield-halved"></i>
-    <p>Säkra betalningar</p>
-  </div>
-  <div class="info-item">
-    <i class="fa-regular fa-face-smile"></i>
-    <p>Nyheter varje dag</p>
-  </div>
-</div>
-  
+
   <div class="accordion" id="accordionExample">
     <div class="accordion-item" *ngFor="let section of accordionSections; let i = index">
       <h2 class="accordion-header" [id]="'heading' + section.id">
@@ -49,7 +51,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="bottom-section-wrapper">
     <div class="bottom-list-container">
       <div class="bottom-list-section" *ngFor="let group of bottomSections" [id]="group.id">
@@ -65,3 +67,5 @@
       <p>© 2024 Freaky Fashion</p>
     </footer>
   </div>
+
+</div>

@@ -24,9 +24,9 @@ const routes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'products/:slug', component: ProductDetailsComponent },
       { path: 'search', component: SearchResultsComponent },
-      { path: '**', component: NotFoundComponent },
+      { path: '**', component: NotFoundComponent }
     ]
-  },
+  }
 ];
 
 @NgModule({
