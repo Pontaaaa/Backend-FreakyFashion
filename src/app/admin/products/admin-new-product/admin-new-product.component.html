@@ -1,7 +1,7 @@
 <div>
   <header>
     <div class="admin-header">
-      <h1>Ny produkt</h1>
+      <h1>Administration</h1>
     </div>
   </header>
 
@@ -9,12 +9,9 @@
     <aside class="admin-menu">
       <nav>
         <ul>
-          <li><a href="#">Dashboard</a></li>
-          <li><a routerLink="/admin/products">Produkter</a></li>
-          <li><a href="#">Orderhantering</a></li>
-          <li><a href="#">Analysdata</a></li>
-          <li><a href="#">Inställningar</a></li>
-          <li><a href="#">Support</a></li>
+          <!-- use routerLink instead of href -->
+          <li><a routerLink="/admin/products" routerLinkActive="active">Produkter</a></li>
+          <li><a routerLink="/admin/categories" routerLinkActive="active">Kategorier</a></li>
         </ul>
       </nav>
     </aside>
