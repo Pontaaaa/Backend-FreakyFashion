@@ -1,98 +1,91 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { ProductService, Category } from '../../services/product.service';
+import { Router, RouterModule } from '@angular/router';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   standalone: true,
   selector: 'admin-category-form',
   imports: [CommonModule, FormsModule, RouterModule],
   template: `
-    <section class="p-4">
-      <h1>{{ isEdit ? 'Redigera kategori' : 'Ny kategori' }}</h1>
+  <div>
+    <header>
+      <div class="admin-header">
+        <h1>Administration</h1>
+      </div>
+    </header>
 
-      <form (ngSubmit)="save()">
-        <label>
-          Namn
-          <input [(ngModel)]="name" name="name" required (input)="updateSlug()">
-        </label>
+    <div class="admin-container">
+      <aside class="admin-menu">
+        <nav>
+          <ul>
+            <li><a routerLink="/admin/products" routerLinkActive="active">Produkter</a></li>
+            <li><a routerLink="/admin/categories" routerLinkActive="active">Kategorier</a></li>
+          </ul>
+        </nav>
+      </aside>
 
-        <label>
-          Slug
-          <input [(ngModel)]="slug" name="slug" required>
-        </label>
-
-        <label>
-          Bild (valfritt)
-          <input type="file" (change)="onFile($event)">
-        </label>
-
-        <div *ngIf="previewUrl">
-          <p>Förhandsvisning:</p>
-          <img [src]="previewUrl" alt="preview" width="140">
+      <main class="admin-content">
+        <div class="content-header">
+          <h2>Ny kategori</h2>
+          <div class="button-group">
+            <a routerLink="/admin/categories" class="new-product-button">Tillbaka</a>
+          </div>
         </div>
 
-        <button type="submit">{{ isEdit ? 'Spara' : 'Skapa' }}</button>
-        <a [routerLink]="['/admin/categories']">Tillbaka</a>
-      </form>
-    </section>
-  `
+        <form (ngSubmit)="save()" class="admin-form">
+          <div class="form-row">
+            <label for="name">Namn</label>
+            <input id="name" name="name" [(ngModel)]="name" required />
+          </div>
+
+          <div class="form-row">
+            <label for="image">Bild (valfritt)</label>
+            <input id="image" type="file" (change)="onFile($event)" />
+          </div>
+
+          <div class="form-row" *ngIf="previewUrl">
+            <label>Förhandsvisning</label>
+            <img [src]="previewUrl" alt="preview" width="140" style="object-fit:cover;border-radius:6px;">
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="new-product-button">Skapa</button>
+          </div>
+        </form>
+      </main>
+    </div>
+  </div>
+`
 })
-export class AdminCategoryFormComponent implements OnInit {
-  isEdit = false;
-  id?: number;
+export class AdminCategoryFormComponent {
   name = '';
-  slug = '';
   imageFile: File | null = null;
   previewUrl: string | null = null;
 
-  constructor(private ps: ProductService, private route: ActivatedRoute, private router: Router) {}
-
-  ngOnInit() {
-    const idParam = this.route.snapshot.paramMap.get('id');
-    if (idParam) {
-      this.isEdit = true;
-      this.id = Number(idParam);
-      this.ps.getCategory(this.id).subscribe(c => {
-        this.name = c.name;
-        this.slug = c.slug;
-        this.previewUrl = c.image ?? null;
-      });
-    }
-  }
-
-  updateSlug() {
-    if (!this.isEdit) {
-      this.slug = this.name.toLowerCase().trim().replace(/\s+/g, '-');
-    }
-  }
+  constructor(private ps: ProductService, private router: Router) {}
 
   onFile(e: Event) {
     const input = e.target as HTMLInputElement;
-    const file = input.files?.[0] ?? null;
     this.imageFile = input.files?.[0] ?? null;
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => this.previewUrl = reader.result as string;
-      reader.readAsDataURL(file);
+    if (this.imageFile) {
+      const r = new FileReader();
+      r.onload = () => (this.previewUrl = r.result as string);
+      r.readAsDataURL(this.imageFile);
     } else {
       this.previewUrl = null;
     }
   }
 
   save() {
-  if (!this.name || !this.slug) return;
+    if (!this.name.trim()) return;
+    const fd = new FormData();
+    fd.append('name', this.name.trim());
+    if (this.imageFile) fd.append('image', this.imageFile);
 
-  const fd = new FormData();
-  fd.append('name', this.name);
-  fd.append('slug', this.slug);
-  if (this.imageFile) fd.append('image', this.imageFile);
-
-  if (this.isEdit && this.id != null) {
-    this.ps.updateCategory(this.id, fd).subscribe(() => this.router.navigate(['/admin/categories']));
-  } else {
-    this.ps.createCategory(fd).subscribe(() => this.router.navigate(['/admin/categories']));
+    this.ps.createCategory(fd).subscribe(() => {
+      this.router.navigate(['/admin/categories']);
+    });
   }
- } 
 }
