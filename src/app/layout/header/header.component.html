@@ -26,14 +26,10 @@
       <i class="fa-solid fa-bag-shopping"></i>
     </a>
   
-    <nav>
-      <ul>
-        <li><a href="#">Nyheter</a></li>
-        <li><a href="#">Kategorier</a></li>
-        <li><a href="#">Topplistan</a></li>
-        <li><a href="#">Rea</a></li>
-        <li><a href="#">Kampanjer</a></li>
-      </ul>
-    </nav>
+<nav class="home-categories">
+  <a *ngFor="let c of categories" [routerLink]="['/category', c.slug]" class="cat-chip">
+    {{ c.name }}
+  </a>
+</nav>
   </header>
 </div>

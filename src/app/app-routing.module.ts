@@ -9,34 +9,22 @@ import { SearchResultsComponent } from './pages/search-results/search-results.co
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { LayoutComponent } from './layout/layout/layout.component';
 
-// NEW: admin categories
+// Admin categories
 import { AdminCategoriesListComponent } from './admin/categories/admin-categories-list-component';
 import { AdminCategoryFormComponent } from './admin/categories/admin-categories-form-component';
 
+// ⛔ Remove this (wrong path):
+// import { CategoryPageComponent } from './pages/category/category-page.component';
+
 const routes: Routes = [
   // Admin - Products
-  {
-    path: 'admin/products',
-    component: AdminProductsComponent
-  },
-  {
-    path: 'admin/products/new',
-    component: AdminNewProductComponent
-  },
+  { path: 'admin/products', component: AdminProductsComponent },
+  { path: 'admin/products/new', component: AdminNewProductComponent },
 
-  // Admin - Categories (NEW)
-  {
-    path: 'admin/categories',
-    component: AdminCategoriesListComponent
-  },
-  {
-    path: 'admin/categories/new',
-    component: AdminCategoryFormComponent
-  },
-  {
-    path: 'admin/categories/:id',
-    component: AdminCategoryFormComponent
-  },
+  // Admin - Categories
+  { path: 'admin/categories', component: AdminCategoriesListComponent },
+  { path: 'admin/categories/new', component: AdminCategoryFormComponent },
+  { path: 'admin/categories/:id', component: AdminCategoryFormComponent },
 
   // Public site under layout
   {
@@ -46,6 +34,14 @@ const routes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'products/:slug', component: ProductDetailsComponent },
       { path: 'search', component: SearchResultsComponent },
+
+      // Public category browsing (lazy-loaded from category-page.ts)
+      {
+        path: 'category/:slug',
+        loadComponent: () =>
+          import('./pages/category/category-page').then(m => m.CategoryPageComponent)
+      },
+
       { path: '**', component: NotFoundComponent }
     ]
   }
