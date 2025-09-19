@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { ProductService } from '../../services/product.service';
-
+import { ProductService } from '../../../services/product.service';
 @Component({
   standalone: true,
   selector: 'admin-category-form',

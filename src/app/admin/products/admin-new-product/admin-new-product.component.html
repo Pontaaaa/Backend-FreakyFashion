@@ -36,7 +36,10 @@
           <input type="text" id="brand" name="brand" placeholder="Märke" [(ngModel)]="formData.brand" required maxlength="20" />
 
           <label for="sku">SKU</label>
-          <input type="text" id="sku" name="sku" placeholder="SKU" [(ngModel)]="formData.sku" pattern="^[A-Za-z]{3}\d{3}$" title="Formatet ska vara XXXYYY. Exempel: AAA111" required maxlength="10" />
+          <input type="text" id="sku" name="sku" placeholder="SKU" [(ngModel)]="formData.sku" 
+                 pattern="^[A-Za-z]{3}\d{3}$" 
+                 title="Formatet ska vara XXXYYY. Exempel: AAA111" 
+                 required maxlength="10" />
 
           <label for="price">Pris</label>
           <input type="text" id="price" name="price" placeholder="Pris" [(ngModel)]="formData.price" required maxlength="10" />
@@ -44,10 +47,23 @@
           <label for="publicationDate">Publiceringsdatum</label>
           <input type="date" id="publicationDate" name="publicationDate" [(ngModel)]="formData.publicationDate" required />
 
-          <button type="submit">Lägg till</button>
+<fieldset class="form-row" style="margin-top: 10px;">
+  <legend>Kategorier</legend>
+  <div class="checkbox-grid">
+    <label *ngFor="let c of categories">
+      <input
+        type="checkbox"
+        [checked]="isSelected(c.id)"
+        (change)="toggleCategory(c.id, $any($event.target).checked)"
+      />
+      {{ c.name }}
+    </label>
+  </div>
+</fieldset>
+
+          <button type="submit">{{ isEdit ? 'Spara ändringar' : 'Lägg till' }}</button>
         </form>
       </div>
     </main>
   </div>
 </div>
-  

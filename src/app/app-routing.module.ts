@@ -10,8 +10,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { LayoutComponent } from './layout/layout/layout.component';
 
 // Admin categories
-import { AdminCategoriesListComponent } from './admin/categories/admin-categories-list-component';
-import { AdminCategoryFormComponent } from './admin/categories/admin-categories-form-component';
+import { AdminCategoriesListComponent } from './admin/categories/admin-categories/admin-categories-list-component';
+import { AdminCategoryFormComponent } from './admin/categories/admin-new-categories/admin-categories-form-component';
 
 // ⛔ Remove this (wrong path):
 // import { CategoryPageComponent } from './pages/category/category-page.component';
@@ -20,6 +20,7 @@ const routes: Routes = [
   // Admin - Products
   { path: 'admin/products', component: AdminProductsComponent },
   { path: 'admin/products/new', component: AdminNewProductComponent },
+  { path: 'admin/products/:id', component: AdminNewProductComponent },
 
   // Admin - Categories
   { path: 'admin/categories', component: AdminCategoriesListComponent },
@@ -39,7 +40,7 @@ const routes: Routes = [
       {
         path: 'category/:slug',
         loadComponent: () =>
-          import('./pages/category/category-page').then(m => m.CategoryPageComponent)
+          import('./pages/category/category-page.component').then(m => m.CategoryPageComponent)
       },
 
       { path: '**', component: NotFoundComponent }

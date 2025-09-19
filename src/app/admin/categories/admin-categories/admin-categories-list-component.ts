@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ProductService, Category } from '../../services/product.service';
+import { ProductService, Category } from '../../../services/product.service';
 
 @Component({
   standalone: true,
