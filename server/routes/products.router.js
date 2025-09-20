@@ -6,14 +6,12 @@ const Database = require("better-sqlite3");
 
 const db = new Database("./db/freakyfashion.db", { verbose: console.log });
 
-// file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, path.join(__dirname, "..", "public", "images")),
   filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`)
 });
 const upload = multer({ storage });
 
-/* ===== Helpers ===== */
 function parseCategoryIds(raw) {
   if (!raw) return [];
   if (typeof raw === "string") {
@@ -32,7 +30,6 @@ function slugify(s) {
     .replace(/\-+/g, '-').replace(/^\-+|\-+$/g, '');
 }
 
-/* ===== GET /api/products  (optional ?category=slug or ?categoryId=ID) ===== */
 router.get("/", (req, res) => {
   try {
     const { category, categoryId } = req.query;
@@ -61,7 +58,6 @@ router.get("/", (req, res) => {
   }
 });
 
-/* ===== GET /api/products/search?q=...  (must be BEFORE /:id) ===== */
 router.get("/search", (req, res) => {
   const query = req.query.q?.toLowerCase();
   if (!query) return res.status(400).json({ message: "Sökfråga saknas." });
@@ -79,7 +75,6 @@ router.get("/search", (req, res) => {
   }
 });
 
-/* ===== GET /api/products/:id  (includes categories) ===== */
 router.get("/:id", (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -101,7 +96,6 @@ router.get("/:id", (req, res) => {
   }
 });
 
-/* ===== POST /api/products  (create + categories) ===== */
 router.post("/", upload.single("image"), (req, res) => {
   try {
     const { name, description, brand, sku, price, publicationDate } = req.body;
@@ -148,7 +142,6 @@ router.post("/", upload.single("image"), (req, res) => {
   }
 });
 
-/* ===== PUT /api/products/:id  (update + categories) ===== */
 router.put("/:id", upload.single("image"), (req, res) => {
   try {
     const id = Number(req.params.id);
@@ -177,7 +170,6 @@ router.put("/:id", upload.single("image"), (req, res) => {
       db.prepare(`UPDATE products SET ${sets.join(", ")} WHERE id=?`).run(...vals);
     }
 
-    // categories (replace all)
     if (req.body.categoryIds !== undefined) {
       const categoryIds = parseCategoryIds(req.body.categoryIds);
       const tx = db.transaction(() => {
@@ -200,7 +192,6 @@ router.put("/:id", upload.single("image"), (req, res) => {
   }
 });
 
-/* ===== DELETE /api/products/:id ===== */
 router.delete("/:id", (req, res) => {
   try {
     const id = Number(req.params.id);

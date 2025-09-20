@@ -9,25 +9,18 @@ import { SearchResultsComponent } from './pages/search-results/search-results.co
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { LayoutComponent } from './layout/layout/layout.component';
 
-// Admin categories
 import { AdminCategoriesListComponent } from './admin/categories/admin-categories/admin-categories-list-component';
 import { AdminCategoryFormComponent } from './admin/categories/admin-new-categories/admin-categories-form-component';
 
-// ⛔ Remove this (wrong path):
-// import { CategoryPageComponent } from './pages/category/category-page.component';
-
 const routes: Routes = [
-  // Admin - Products
   { path: 'admin/products', component: AdminProductsComponent },
   { path: 'admin/products/new', component: AdminNewProductComponent },
   { path: 'admin/products/:id', component: AdminNewProductComponent },
 
-  // Admin - Categories
   { path: 'admin/categories', component: AdminCategoriesListComponent },
   { path: 'admin/categories/new', component: AdminCategoryFormComponent },
   { path: 'admin/categories/:id', component: AdminCategoryFormComponent },
 
-  // Public site under layout
   {
     path: '',
     component: LayoutComponent,
@@ -36,7 +29,6 @@ const routes: Routes = [
       { path: 'products/:slug', component: ProductDetailsComponent },
       { path: 'search', component: SearchResultsComponent },
 
-      // Public category browsing (lazy-loaded from category-page.ts)
       {
         path: 'category/:slug',
         loadComponent: () =>

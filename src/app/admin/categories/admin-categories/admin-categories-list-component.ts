@@ -36,7 +36,6 @@ import { ProductService, Category } from '../../../services/product.service';
           </div>
         </div>
 
-        <!-- Table always visible -->
         <table class="product-data-table">
           <thead>
             <tr>
@@ -53,7 +52,6 @@ import { ProductService, Category } from '../../../services/product.service';
                 </a>
               </td>
             </tr>
-            <!-- Show this if loaded but no categories -->
             <tr *ngIf="categories.length === 0 && loaded">
               <td colspan="2">Inga kategorier hittades.</td>
             </tr>

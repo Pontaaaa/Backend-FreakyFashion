@@ -4,14 +4,12 @@ const path = require('path');
 const multer = require('multer');
 const db = require('../db/db');
 
-// ----- Multer: store images in /public/images
 const storage = multer.diskStorage({
   destination: (_, __, cb) => cb(null, path.join(__dirname, '..', 'public', 'images')),
   filename: (_, file, cb) => cb(null, `${Date.now()}-${file.originalname}`)
 });
 const upload = multer({ storage });
 
-// ----- Helpers (add here)
 function slugify(s) {
   return s.toString().trim().toLowerCase()
     .replace(/\s+/g, '-')
@@ -34,7 +32,6 @@ function uniqueSlugFromName(name, db) {
   }
 }
 
-// ----- Routes
 router.get('/', (req, res) => {
   try {
     const rows = db.prepare(`SELECT id, name, slug, image FROM categories ORDER BY name`).all();
@@ -57,7 +54,6 @@ router.get('/:id', (req, res) => {
   }
 });
 
-// REPLACE your old POST with this one (name required, image optional, slug auto/unique)
 router.post('/', upload.single('image'), (req, res) => {
   try {
     const { name } = req.body;

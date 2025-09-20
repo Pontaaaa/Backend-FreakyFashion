@@ -10,11 +10,9 @@ import { ProductService, Category, Product } from 'src/app/services/product.serv
 export class AdminNewProductComponent implements OnInit {
   title = 'Ny produkt';
 
-  // create/edit toggle
   isEdit = false;
   id?: number;
 
-  // categories for checkboxes
   categories: Category[] = [];
   selectedCategoryIds = new Set<number>();
 
@@ -35,12 +33,10 @@ export class AdminNewProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // load categories for the checkbox list
     this.productService.getCategories().subscribe({
       next: (cats) => (this.categories = cats)
     });
 
-    // OPTIONAL: support edit mode if you later add route /admin/products/:id
     const idParam = this.route.snapshot.paramMap.get('id');
     if (idParam) {
       this.isEdit = true;
@@ -48,7 +44,6 @@ export class AdminNewProductComponent implements OnInit {
       this.title = 'Redigera produkt';
 
       this.productService.getById(this.id).subscribe((p: Product) => {
-        // prefill form fields
         this.formData.name = p.name;
         this.formData.description = p.description;
         this.formData.brand = p.brand;
@@ -56,7 +51,6 @@ export class AdminNewProductComponent implements OnInit {
         this.formData.price = String(p.price);
         this.formData.publicationDate = p.publicationDate;
 
-        // preselect categories if backend returns them
         if (p.categories?.length) {
           p.categories.forEach(c => this.selectedCategoryIds.add(c.id));
         }
@@ -69,12 +63,10 @@ export class AdminNewProductComponent implements OnInit {
     this.formData[name] = type === 'file' ? files[0] : value;
   }
 
-  // called from template checkboxes
   toggleCategory(id: number, checked: boolean) {
     if (checked) this.selectedCategoryIds.add(id);
     else this.selectedCategoryIds.delete(id);
   }
-  // for [checked] binding
   isSelected(id: number) {
     return this.selectedCategoryIds.has(id);
   }
@@ -89,7 +81,6 @@ export class AdminNewProductComponent implements OnInit {
       }
     }
 
-    // append selected category ids as JSON string
     const categoryIds = Array.from(this.selectedCategoryIds.values());
     form.append('categoryIds', JSON.stringify(categoryIds));
 

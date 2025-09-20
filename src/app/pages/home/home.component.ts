@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  standalone: false, // keep as you have it today; if standalone, add imports: [CommonModule, RouterModule]
+  standalone: false,
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   ];
 
   products: Product[] = [];
-  categories: Category[] = [];   // NEW
+  categories: Category[] = [];
 
   constructor(private http: HttpClient, private ps: ProductService) {}
 
@@ -36,7 +36,6 @@ export class HomeComponent implements OnInit {
       error: () => console.error('Kunde inte hämta produkter.')
     });
 
-    // NEW: fetch categories for the home page
     this.ps.getCategories().subscribe({
       next: (cats) => this.categories = cats,
       error: () => console.error('Kunde inte hämta kategorier.')
